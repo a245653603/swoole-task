@@ -55,8 +55,6 @@ php swoole.php list
   指定此参数，服务以守护进程模式运行，不指定读取配置文件值
 - -D, --nondaemon
   指定此参数，以非守护进程模式运行,不指定则读取配置文件值
-- -D, --nondaemon
-  指定此参数，以非守护进程模式运行,不指定则读取配置文件值
 - -h, --host  
   指定监听ip,例如 php swoole.php -h 127.0.0.1
 - -p, --port
