@@ -1,5 +1,47 @@
-### Swoole-Task服务管理脚本功能说明 ###
+## Swoole-Task ##
 
+### Swoole-Task 用法示例 ###
+------------------------------
+- 路由说明
+
+  127.0.0.1:9510/ctrl/action?paramas=xxx
+  
+  ctrl对应app/ctrl目录下的xxxCtrl.php文件(xxxCtrl.php中的class名称也必须是xxxCtrl,继承base\Ctrl)
+  
+  action对应xxxCtrl.php文件中的xxxAction(action 的最后必须返回$this->ret,即最后一句 return $this->ret)
+  
+  127.0.0.1:9510?op=ctrl.action&params=xxx 等同于 127.0.0.1:9510/ctrl/action?paramas=xxx
+  
+- 启动swoole-task后发起请求(假定监控的ip和端口是127.0.0.1:9510)
+
+  curl "127.0.0.1:9510/ctrl/action?paramas=xxx" 或者 curl "127.0.0.1:9510?op=ctrl.action&params=xxx"
+  
+  投递任务到swoole-task进行处理
+  
+- swoole-task目录结构说明
+
+  app  swoole-task具体处理业务逻辑的地方
+  
+  app\config 配置文件目录，根据环境dev,test,prod来加载配置,环境的配置在config/swoole.ini的配置项 env
+  
+  app\ctrl controller文件所在目录，处理具体业务逻辑，继承base\Ctrl这个类
+  
+  app\dao  数据访问层，操作数据库的方法
+  
+  app\helper 公共方法类
+  
+  app\vendor 如果依赖composer 第三方库，在在app目录下创建composer.json
+  
+  base 核心框架类，Ctrl Dao Helper App 四个类，命名空间base
+  
+  config swoole-task 配置文件目录swoole.ini，配置参数类容参考源码说明
+  
+  tmp 临时目录，日志swoole-task中间文件等等在此目录下存放
+
+> swoole-task 本身是一个比较简单的基于swoole扩展的异步任务处理框架，更详细使用方法看源码，或者在github留issues，有好的建议我会根据情况及时改进
+
+### Swoole-Task服务管理脚本功能说明 ###
+----------------------------------------
 > 1 如果swoole.php 脚本所在目录config/swoole.ini 文件不存在，可以直接删除config目录，会自动创建配置文件，创建后的文件根据需求修改  
   2 注意swoole.ini 的参数dev，这个取值为dev,test,prod 根据此值读取swoole/app的配置文件
 
